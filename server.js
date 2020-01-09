@@ -7,7 +7,7 @@ const path = require('path');
 
 //let Lists = require('./models/lists-model');
 
-const persons = require('./routes/persons');
+const persons = require('./routes/api/persons');
 
 app.use(cors());
 app.use(bodyParser.json());
