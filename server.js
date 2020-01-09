@@ -3,9 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const PORT = 4000;
 const listsRoutes = express.Router();
-const path = require("path");
+const path = require('path');
 
 let Lists = require('./lists-model');
 
@@ -86,7 +85,12 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
-app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT);
-});
+const port = process.env.PORT || 5000;
+
+require("dotenv").config();
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
+// app.listen(PORT, function() {
+//     console.log("Server is running on Port: " + PORT);
+// });
 
