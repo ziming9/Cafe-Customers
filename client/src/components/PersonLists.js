@@ -23,7 +23,7 @@ class PersonLists extends Component {
 
         this.onDelete = this.onDelete.bind(this);
 
-        state = {
+        this.state = {
             lists: []
         }
     }
