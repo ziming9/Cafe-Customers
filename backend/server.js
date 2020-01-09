@@ -5,13 +5,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const PORT = 4000;
 const listsRoutes = express.Router();
+const path = require("path");
 
 let Lists = require('./lists-model');
 
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/lists', { useNewUrlParser: true });
+mongoose.connect(process.env.mongolab-asymmetrical-42618 || 'mongodb://127.0.0.1:27017/lists', { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {
@@ -78,6 +79,12 @@ listsRoutes.route('/delete/:id').delete(function(req, res) {
 })
 
 app.use('/lists', listsRoutes);
+
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);

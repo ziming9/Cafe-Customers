@@ -1,13 +1,13 @@
-## Instructions
+# Instructions
 
-# Start client locally
+## Start client locally
 npm start
 
-# Start server locally
+## Start server locally
 cd backend
 nodemon server
 
-# Start Mongodb
+## Start Mongodb
 (if database not created)
 mongo
 use (db_name)
