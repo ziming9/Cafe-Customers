@@ -23,7 +23,7 @@ class PersonLists extends Component {
 
         this.onDelete = this.onDelete.bind(this);
 
-        this.state = {
+        state = {
             lists: []
         }
     }
@@ -48,7 +48,7 @@ class PersonLists extends Component {
             })
     }
 
-    personList() {
+    personList = () => {
         return this.state.lists.map((currentList, i) => {
             return <Lists 
                 lists={currentList}
