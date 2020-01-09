@@ -29,7 +29,7 @@ class PersonLists extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/lists')
+        axios.get('https://cafe-customers.herokuapp.com/lists')
             .then(response => {
                 this.setState({ lists: response.data });
             })
@@ -39,7 +39,7 @@ class PersonLists extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('http://localhost:4000/lists/')
+        axios.get('https://cafe-customers.herokuapp.com/lists/')
             .then(response => {
                 this.setState({ lists: response.data});
             })
@@ -58,7 +58,7 @@ class PersonLists extends Component {
     }
 
     onDelete(_id) {
-        axios.delete('http://localhost:4000/lists/delete/'+_id)
+        axios.delete('https://cafe-customers.herokuapp.com/lists/delete/'+_id)
             .then(response => {
                 this.state.lists.splice(_id, 1);
             })

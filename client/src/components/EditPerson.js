@@ -15,7 +15,7 @@ class EditPerson extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/lists/'+this.props.match.params.id)
+        axios.get('https://cafe-customers.herokuapp.com//lists/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     lists_name: response.data.lists_name,
@@ -48,7 +48,7 @@ class EditPerson extends Component {
             lists_phone: this.state.lists_phone
         }; 
 
-        axios.post('http://localhost:4000/lists/update/'+this.props.match.params.id, obj)
+        axios.post('https://cafe-customers.herokuapp.com/lists/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
         this.props.history.push('/lists');
