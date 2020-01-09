@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-let Person = require('../models/lists-model');
+let Person = require('../../models/lists-model');
 
 // router.route('/').get(function(req, res) {
 //     Lists.find(function(err, lists) {
