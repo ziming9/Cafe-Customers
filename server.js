@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const listsRoutes = express.Router();
 const path = require('path');
 
 //let Lists = require('./models/lists-model');
@@ -79,7 +78,7 @@ connection.once('open', function() {
 //     })
 // })
 
-app.use('/routes/persons', persons);
+app.use('/api/persons', persons);
 
 app.use(express.static(path.join(__dirname, "client", "build")));
 

@@ -28,18 +28,29 @@ class PersonLists extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     axios.get('https://cafe-customers.herokuapp.com/lists')
+    //         .then(response => {
+    //             this.setState({ lists: response.data });
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         })
+    // }
+
     componentDidMount() {
-        axios.get('https://cafe-customers.herokuapp.com/lists')
-            .then(response => {
-                this.setState({ lists: response.data });
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+        axios({
+            method: 'get',
+            url: '/api/persons'
+        }).then(res => {
+            this.setState({ lists: res.data});
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     componentDidUpdate() {
-        axios.get('https://cafe-customers.herokuapp.com/lists/')
+        axios.get('https://cafe-customers.herokuapp.com/lists')
             .then(response => {
                 this.setState({ lists: response.data});
             })

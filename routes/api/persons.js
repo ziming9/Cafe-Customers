@@ -4,18 +4,28 @@ const mongoose = require('mongoose');
 
 let Person = require('../models/lists-model');
 
-router.route('/').get(function(req, res) {
-    Lists.find(function(err, lists) {
+// router.route('/').get(function(req, res) {
+//     Lists.find(function(err, lists) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             res.json(lists);
+//         }
+//     });
+// })
+
+router.get('/', (req, res) => {
+    Person.find((err, lists) => {
         if (err) {
             console.log(err);
         } else {
             res.json(lists);
         }
-    });
+    })
 })
 
-router.route('/add').post(function(req, res) {
-    let lists = new Lists(req.body);
+router.post('/add', (req, res) => {
+    let lists = new Person(req.body);
     lists.save()
         .then(lists => {
             res.status(200).json({'lists': 'person added successfully!'});
@@ -25,15 +35,15 @@ router.route('/add').post(function(req, res) {
         })
 })
 
-router.route('/:id').get(function(req, res) {
+router.get('/:id', (req, res) => {
     let id = req.params.id;
-    Lists.findById(id, function(err, lists) {
+    Person.findById(id, function(err, lists) {
         res.json(lists);
     });
 });
 
-router.route('/update/:id').post(function(req, res) {
-    Lists.findById(req.params.id, function(err, lists) {
+router.post('/update/:id', (req, res) => {
+    Person.findById(req.params.id, function(err, lists) {
         if(!lists)
             res.status(404).send('data not found');
         else {
@@ -50,7 +60,7 @@ router.route('/update/:id').post(function(req, res) {
     })
 })
 
-router.route('/delete/:id').delete(function(req, res) {
+router.delete('/delete/:id', (req, res) => {
     let id = req.params.id;
 
     Person.findByIdAndRemove(id, (err, tasks) => {
