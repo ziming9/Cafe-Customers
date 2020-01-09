@@ -6,12 +6,12 @@ const mongoose = require('mongoose');
 const listsRoutes = express.Router();
 const path = require('path');
 
-let Lists = require('./lists-model');
+let Lists = require('./models/lists-model');
 
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect(process.env.mongolab-asymmetrical-42618 || 'mongodb://127.0.0.1:27017/lists', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/lists', { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {
