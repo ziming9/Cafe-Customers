@@ -52,21 +52,30 @@ class PersonLists extends Component {
 
     personList() {
         return this.state.lists.map(function(currentList, i) {
-            return <Lists 
+            return <Lists
+                key={i}
                 lists={currentList}
-                //onDelete={this.onDelete}
-                key={i}> </Lists>
+                onDelete={this.onDelete}> </Lists>
         })
     }
 
     onDelete(_id) {
-        axios.delete('/persons/delete/'+_id)
-            .then(response => {
-                this.state.lists.splice(_id, 1);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        axios({
+            method: 'delete',
+            url: '/persons/delete/'+_id,
+        }).then(res => {
+            this.state.lists.splice(_id, 1);
+        }).catch(error => {
+            console.log(error);
+        })
+
+        // axios.delete('/persons/delete/'+_id)
+        //     .then(response => {
+        //         this.state.lists.splice(_id, 1);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     })
     }
 
     render() {

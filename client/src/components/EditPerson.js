@@ -15,16 +15,17 @@ class EditPerson extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://cafe-customers.herokuapp.com/lists/'+this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    lists_name: response.data.lists_name,
-                    lists_phone: response.data.lists_phone
-                })
+        axios({
+            method: "get",
+            url: "/persons/"+this.props.match.params.id
+        }).then(res => {
+            this.setState({
+                lists_name: res.data.lists_name,
+                lists_phone: res.data.lists_phone
             })
-            .catch(error => {
-                console.log(error);
-            })
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     // Functions
@@ -48,8 +49,16 @@ class EditPerson extends Component {
             lists_phone: this.state.lists_phone
         }; 
 
-        axios.post('https://cafe-customers.herokuapp.com/lists/update/'+this.props.match.params.id, obj)
-            .then(res => console.log(res.data));
+        // axios.post('https://cafe-customers.herokuapp.com/lists/update/'+this.props.match.params.id, obj)
+        //     .then(res => console.log(res.data));
+
+        // this.props.history.push('/persons');
+
+        axios({
+            method: "post",
+            url: "/persons/update/"+this.props.match.params.id,
+            data: obj
+        }).then(res => console.log(res.data));
 
         this.props.history.push('/persons');
     }
