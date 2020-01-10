@@ -52,7 +52,7 @@ class PersonLists extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('https://cafe-customers.herokuapp.com/lists')
+        axios.get('https://cafe-customers.herokuapp.com/api/persons')
             .then(response => {
                 console.log(response.data);
                 this.setState({ lists: response.data});
