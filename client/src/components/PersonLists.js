@@ -41,7 +41,7 @@ class PersonLists extends Component {
     componentDidMount() {
         axios({
             method: 'get',
-            url: '/api/persons'
+            url: 'https://cafe-customers.herokuapp.com/api/persons'
         }).then(res => {
             this.setState({ lists: res.data});
         }).catch(err => {
