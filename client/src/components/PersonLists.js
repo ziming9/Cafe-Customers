@@ -43,8 +43,8 @@ class PersonLists extends Component {
             method: 'get',
             url: 'https://cafe-customers.herokuapp.com/api/persons'
         }).then(res => {
-            console.log(res);
-            console.log(res.data);
+            // console.log(res);
+            // console.log(res.data);
             this.setState({ lists: res.data});
         }).catch(err => {
             console.log(err);
@@ -54,6 +54,7 @@ class PersonLists extends Component {
     componentDidUpdate() {
         axios.get('https://cafe-customers.herokuapp.com/lists')
             .then(response => {
+                console.log(response.data);
                 this.setState({ lists: response.data});
             })
             .catch(error => {
