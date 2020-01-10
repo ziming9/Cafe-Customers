@@ -26,6 +26,7 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
     let lists = new Person(req.body);
+    console.log(lists);
     lists.save()
         .then(lists => {
             res.status(200).json({'lists': 'person added successfully!'});
