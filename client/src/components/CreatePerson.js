@@ -44,7 +44,7 @@ class CreatePerson extends Component {
 
         axios({
             method: 'post',
-            url: '/api/add',
+            url: '/add',
             data: newLists
         }).then( res => console.log(res.data));
 
