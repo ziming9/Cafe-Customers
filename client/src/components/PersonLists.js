@@ -43,6 +43,7 @@ class PersonLists extends Component {
             method: 'get',
             url: 'https://cafe-customers.herokuapp.com/api/persons'
         }).then(res => {
+            console.log(res);
             this.setState({ lists: res.data});
         }).catch(err => {
             console.log(err);
