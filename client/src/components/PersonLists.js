@@ -38,16 +38,16 @@ class PersonLists extends Component {
     //         })
     // }
 
-    componentDidMount() {
-        axios({
-            method: 'get',
-            url: 'https://cafe-customers.herokuapp.com/api/persons'
-        }).then(res => {
-            this.setState({ lists: res.data});
-        }).catch(err => {
-            console.log(err);
-        })
-    }
+    // componentDidMount() {
+    //     axios({
+    //         method: 'get',
+    //         url: 'https://cafe-customers.herokuapp.com/api/persons'
+    //     }).then(res => {
+    //         this.setState({ lists: res.data});
+    //     }).catch(err => {
+    //         console.log(err);
+    //     })
+    // }
 
     componentDidUpdate() {
         axios.get('https://cafe-customers.herokuapp.com/lists')
