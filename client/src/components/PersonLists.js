@@ -52,15 +52,26 @@ class PersonLists extends Component {
     }
 
     componentDidUpdate() {
-        axios.get('https://cafe-customers.herokuapp.com/api/persons')
-            .then(response => {
-                console.log(response.data);
-                this.setState({ lists: response.data});
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        axios({
+            method: 'get',
+            url: 'https://cafe-customers.herokuapp.com/api/persons',
+        }).then(res => {
+            this.setState({ lists: res.data});
+        }).catch(err => {
+            console.log(err);
+        })
     }
+
+    // componentDidUpdate() {
+    //     axios.get('https://cafe-customers.herokuapp.com/api/persons')
+    //         .then(response => {
+    //             console.log(response.data);
+    //             this.setState({ lists: response.data});
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }
 
     personList() {
         return this.state.lists.map(function(currentList, i) {
