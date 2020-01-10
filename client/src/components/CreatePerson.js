@@ -40,7 +40,13 @@ class CreatePerson extends Component {
 
         // Using axios.post to send HTTP request to backend
 
-        axios.post('https://cafe-customers.herokuapp.com/lists/add', newLists).then(res => console.log(res.data));
+        // axios.post('https://cafe-customers.herokuapp.com/lists/add', newLists).then(res => console.log(res.data));
+
+        axios({
+            method: 'post',
+            url: '/api/add',
+            data: newLists
+        }).then( res => console.log(res.data));
 
         this.setState({name: '', phone: ''});
     }
