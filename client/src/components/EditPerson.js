@@ -15,7 +15,7 @@ class EditPerson extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://cafe-customers.herokuapp.com//lists/'+this.props.match.params.id)
+        axios.get('https://cafe-customers.herokuapp.com/lists/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
                     lists_name: response.data.lists_name,
@@ -51,7 +51,7 @@ class EditPerson extends Component {
         axios.post('https://cafe-customers.herokuapp.com/lists/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
-        this.props.history.push('/lists');
+        this.props.history.push('/persons');
     }
 
     render () {

@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Layout />
       <Route path="/" exact component={HomeScreen}></Route>
-      <Route path="/lists" component={PersonLists}></Route>
+      <Route path="/persons" component={PersonLists}></Route>
       <Route path="/edit/:id" component={EditPerson}></Route>
     </Router>
   );

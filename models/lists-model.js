@@ -10,4 +10,4 @@ let Lists = new Schema({
     }
 });
 
-module.exports = mongoose.model('Lists', Lists);
+module.exports = mongoose.model('Person', Lists);

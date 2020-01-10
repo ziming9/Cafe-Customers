@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-let Person = require('../../models/lists-model');
+let Person = require('../models/lists-model');
 
 // router.route('/').get(function(req, res) {
 //     Lists.find(function(err, lists) {
@@ -14,26 +14,25 @@ let Person = require('../../models/lists-model');
 //     });
 // })
 
-router.get('/', (req, res) => {
-    Person.find((err, lists) => {
+router.get('/', (req, res) => { 
+    Person.find((err, data) => {
         if (err) {
-            console.log(err);
+            return next(error);
         } else {
-            res.json(lists);
+            res.json(data);
         }
     })
 })
 
 router.post('/add', (req, res) => {
-    let lists = new Person(req.body);
-    console.log(lists);
-    lists.save()
-        .then(lists => {
-            res.status(200).json({'lists': 'person added successfully!'});
-        })
-        .catch(err => {
-            res.status(400).send('adding failed');
-        })
+    Person.create(req.body, (err, data) => {
+        if (err) {
+            return next(err)
+        } else {
+            console.log(data);
+            res.json(data);
+        }
+    })
 })
 
 router.get('/:id', (req, res) => {

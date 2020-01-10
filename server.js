@@ -4,20 +4,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
+const database = require('./database/db');
 
-const persons = require('./routes/api/persons');
+const persons = require('./routes/persons');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/lists', { useNewUrlParser: true });
-const connection = mongoose.connection;
-
-connection.once('open', function() {
-    console.log("MongoDB database connection established successfully");
-})
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI || database.db, { useNewUrlParser: true });
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/api/persons', persons);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/persons', persons);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, "client", "build")));
@@ -33,4 +30,15 @@ app.listen(port, () => console.log(`Server running on port ${port}`));
 // app.listen(PORT, function() {
 //     console.log("Server is running on Port: " + PORT);
 // });
+
+// Error Handling
+app.use((req, res, next) => {
+    next(createError(404));
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.message);
+    if (!err.statusCode) err.statusCode = 500;
+    res.status(err.statusCode).send(err.message);
+});
 

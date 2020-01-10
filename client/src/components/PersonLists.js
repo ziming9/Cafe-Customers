@@ -12,7 +12,7 @@ const Lists = props => (
         <td>{props.lists.lists_phone}</td>
         <td>
             <Link to={'/edit/'+props.lists._id}>Edit</Link> /
-            <span style={styles}onClick={() => props.onDelete(props.lists._id)}> Delete</span>
+            <span style={styles} onClick={() => props.onDelete(props.lists._id)}> Delete</span>
         </td>
     </tr>
 )
@@ -28,23 +28,11 @@ class PersonLists extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     axios.get('https://cafe-customers.herokuapp.com/lists')
-    //         .then(response => {
-    //             this.setState({ lists: response.data });
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         })
-    // }
-
     componentDidMount() {
         axios({
             method: 'get',
-            url: 'https://cafe-customers.herokuapp.com/api/persons'
+            url: '/persons'
         }).then(res => {
-            // console.log(res);
-            // console.log(res.data);
             this.setState({ lists: res.data});
         }).catch(err => {
             console.log(err);
@@ -54,7 +42,7 @@ class PersonLists extends Component {
     componentDidUpdate() {
         axios({
             method: 'get',
-            url: 'https://cafe-customers.herokuapp.com/api/persons',
+            url: '/persons',
         }).then(res => {
             this.setState({ lists: res.data});
         }).catch(err => {
@@ -62,28 +50,17 @@ class PersonLists extends Component {
         })
     }
 
-    // componentDidUpdate() {
-    //     axios.get('https://cafe-customers.herokuapp.com/api/persons')
-    //         .then(response => {
-    //             console.log(response.data);
-    //             this.setState({ lists: response.data});
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    // }
-
     personList() {
         return this.state.lists.map(function(currentList, i) {
             return <Lists 
                 lists={currentList}
-                onDelete={this.onDelete}
+                //onDelete={this.onDelete}
                 key={i}> </Lists>
         })
     }
 
     onDelete(_id) {
-        axios.delete('https://cafe-customers.herokuapp.com/lists/delete/'+_id)
+        axios.delete('/persons/delete/'+_id)
             .then(response => {
                 this.state.lists.splice(_id, 1);
             })
@@ -105,7 +82,7 @@ class PersonLists extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* { this.personList() } */}
+                        { this.personList() }
                     </tbody>
                 </table>
             </div>
