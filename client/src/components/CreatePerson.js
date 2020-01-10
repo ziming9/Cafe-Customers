@@ -9,6 +9,7 @@ class CreatePerson extends Component {
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangePhone = this.onChangePhone.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.clearHandler = this.clearHandler.bind(this);
     }
 
     // States 
@@ -30,6 +31,13 @@ class CreatePerson extends Component {
         });
     }
 
+    clearHandler = (e) => {
+        this.setState({
+            name: '',
+            phone: '',
+        })
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
 
@@ -37,10 +45,6 @@ class CreatePerson extends Component {
             lists_name: this.state.name,
             lists_phone: this.state.phone
         }; 
-
-        // Using axios.post to send HTTP request to backend
-
-        // axios.post('https://cafe-customers.herokuapp.com/lists/add', newLists).then(res => console.log(res.data));
 
         axios({
             method: 'post',
@@ -55,11 +59,13 @@ class CreatePerson extends Component {
     render() {
         return (
             <div style={{marginTop: 20}}>
-                <form onSubmit={this.onSubmit}>
+                <form>
                     <div className="form-group">
                         <label>Phone</label>
-                        <input 
+                        <input
+                            value={this.state.phone}
                             type="text"
+                            placeholder="Enter phone number"
                             className="form-control"
                             phone={this.state.phone}
                             onChange={this.onChangePhone}></input>
@@ -69,20 +75,28 @@ class CreatePerson extends Component {
                         <label>Name</label>
                         <input 
                             type="text"
+                            value={this.state.name}
+                            placeholder="Enter name"
                             className="form-control"
                             name={this.state.name}
                             onChange={this.onChangeName}></input>
                     </div>
                     
                     <div className="form-group">
-                        <div className="row">
-                            <button
-                                style={{padding: 2}} 
-                                type="submit"
-                                className="col-md-4 btn btn-primary">Create</button>
-                            <button
-                                type="submit"
-                                className="col-md-4 btn btn-danger">Clear</button>
+                        <div className="btn-toolbar">
+                        <div className="btn-group ml-5">
+                                <button
+                                    className="btn btn-info"
+                                    onClick={this.clearHandler}>Clear</button>
+                            </div>
+
+                            <div className="btn-group ml-5">
+                                <button
+                                    type="submit"
+                                    className="btn btn-success"
+                                    onSubmit={this.onSubmit}>Create</button>
+                            </div>
+                            
                         </div>
                     </div>
                 </form>
