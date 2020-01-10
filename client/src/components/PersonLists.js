@@ -44,6 +44,7 @@ class PersonLists extends Component {
             url: 'https://cafe-customers.herokuapp.com/api/persons'
         }).then(res => {
             console.log(res);
+            console.log(res.data);
             this.setState({ lists: res.data});
         }).catch(err => {
             console.log(err);
@@ -92,7 +93,7 @@ class PersonLists extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.personList() }
+                        {/* { this.personList() } */}
                     </tbody>
                 </table>
             </div>
