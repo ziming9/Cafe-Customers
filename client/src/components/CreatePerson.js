@@ -94,7 +94,7 @@ class CreatePerson extends Component {
                                 <button
                                     type="submit"
                                     className="btn btn-success"
-                                    onSubmit={this.onSubmit}>Create</button>
+                                    onClick={this.onSubmit}>Create</button>
                             </div>
                             
                         </div>
