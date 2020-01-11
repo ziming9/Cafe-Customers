@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import blacklist_skull from '../assets/blacklist_skull.png';
 
 const styles = {
-    color: '#0000EE'
+    marginLeft: '2px'
 }
 
 const Lists = props => (
     <tr>
         <td>{props.lists.lists_phone}</td>
         <td>{props.lists.lists_name}</td>
+        <td>{props.lists.lists_address}</td>
+        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15}} src={blacklist_skull}></img> : <p>No</p>}</td>
         <td>
-            <Link to={'/edit/'+props.lists._id}>Edit</Link> /
-            <span 
-                style={styles} 
-                onClick={() => props.deleteHandler(props.lists._id)}> Delete</span>
+            <button className="btn btn-link">
+                <Link to={'/edit/'+props.lists._id}
+                    style={{textDecoration: 'none'}}>Edit</Link>
+            </button>
+            
+            <button className="btn btn-link"
+                style={styles}
+                onClick={() => props.deleteHandler(props.lists._id)}>Delete</button>
         </td>
     </tr>
 )
@@ -81,6 +89,8 @@ class PersonLists extends Component {
                         <tr>
                             <th>Phone</th>
                             <th>Name</th>
+                            <th>Address</th>
+                            <th>Blacklist</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

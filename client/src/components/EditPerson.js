@@ -6,12 +6,15 @@ class EditPerson extends Component {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangePhone = this.onChangePhone.bind(this);
+        this.onChangeBlacklist = this.onChangeBlacklist.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
     state = {
         lists_name: '',
-        lists_phone: ''
+        lists_phone: '',
+        lists_address: '',
+        lists_blacklist: false
     }
 
     componentDidMount() {
@@ -41,18 +44,27 @@ class EditPerson extends Component {
         });
     }
 
+    onChangeAddress = (e) => {
+        this.setState({
+            lists_address: e.target.value
+        });
+    }
+
+    onChangeBlacklist = (e) => {
+        this.setState({
+            lists_blacklist: true
+        })
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
 
         const obj = {
             lists_name: this.state.lists_name,
-            lists_phone: this.state.lists_phone
+            lists_phone: this.state.lists_phone,
+            lists_address: this.state.lists_address,
+            lists_blacklist: this.state.lists_blacklist
         }; 
-
-        // axios.post('https://cafe-customers.herokuapp.com/lists/update/'+this.props.match.params.id, obj)
-        //     .then(res => console.log(res.data));
-
-        // this.props.history.push('/persons');
 
         axios({
             method: "post",
@@ -69,6 +81,14 @@ class EditPerson extends Component {
                 <h3>Edit Person</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
+                        <label>Phone</label>
+                        <input 
+                            type="text"
+                            className="form-control"
+                            value={this.state.lists_phone}
+                            onChange={this.onChangePhone}></input>
+                    </div>
+                    <div className="form-group">
                         <label>Name</label>
                         <input 
                             type="text"
@@ -77,12 +97,21 @@ class EditPerson extends Component {
                             onChange={this.onChangeName}></input>
                     </div>
                     <div className="form-group">
-                        <label>Phone</label>
+                        <label>Address</label>
                         <input 
                             type="text"
+                            value={this.state.lists_address}
+                            placeholder="Enter address"
                             className="form-control"
-                            value={this.state.lists_phone}
-                            onChange={this.onChangePhone}></input>
+                            onChange={this.onChangeAddress}></input>
+                    </div>
+                    <div className="form-group">
+                        <div className="form-check">
+                            <input className="form-check-input" 
+                                type="checkbox"
+                                onChange={this.onChangeBlacklist}></input>
+                            <label className="form-check-label">Blacklist?</label>
+                        </div>
                     </div>
                     <div className="form-group">
                         <input 

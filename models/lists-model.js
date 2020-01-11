@@ -7,7 +7,10 @@ let Lists = new Schema({
     },
     lists_name: {
         type: String
-    }, 
+    },
+    lists_address: {
+        type: String
+    } 
 });
 
 module.exports = mongoose.model('Person', Lists);
