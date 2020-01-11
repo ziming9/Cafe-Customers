@@ -49,6 +49,8 @@ router.post('/update/:id', (req, res) => {
         else {
             lists.lists_name = req.body.lists_name;
             lists.lists_phone = req.body.lists_phone;
+            lists.lists_address = req.body.lists_address;
+            lists.lists_blacklist = req.body.lists_blacklist;
 
             lists.save().then(lists => {
                 res.json('Lists updated');

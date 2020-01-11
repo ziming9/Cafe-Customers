@@ -86,6 +86,7 @@ class EditPerson extends Component {
                         <input 
                             type="text"
                             className="form-control"
+                            placeholder="Enter phone"
                             value={this.state.lists_phone}
                             onChange={this.onChangePhone}></input>
                     </div>
@@ -94,6 +95,7 @@ class EditPerson extends Component {
                         <input 
                             type="text"
                             className="form-control"
+                            placeholder="Enter name"
                             value={this.state.lists_name}
                             onChange={this.onChangeName}></input>
                     </div>
@@ -101,9 +103,9 @@ class EditPerson extends Component {
                         <label>Address</label>
                         <input 
                             type="text"
-                            value={this.state.lists_address}
                             placeholder="Enter address"
                             className="form-control"
+                            value={this.state.lists_address}
                             onChange={this.onChangeAddress}></input>
                     </div>
                     <div className="form-group">
