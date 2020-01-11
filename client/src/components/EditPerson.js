@@ -6,6 +6,7 @@ class EditPerson extends Component {
         super(props);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangePhone = this.onChangePhone.bind(this);
+        this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangeBlacklist = this.onChangeBlacklist.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -72,7 +73,7 @@ class EditPerson extends Component {
             data: obj
         }).then(res => console.log(res.data));
 
-        this.props.history.push('/persons');
+        this.props.history.push('/');
     }
 
     render () {
