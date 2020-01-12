@@ -15,6 +15,8 @@ const navbar = (props) => (
                         <Link to="/persons" className="nav-link">Lists</Link>
                     </li>
                 </ul>
+                <button className="btn btn-outline-success my-2 my-sm-">
+                    <Link to="/register"></Link>Sign up</button>
             </div>
         </nav>
     </div>

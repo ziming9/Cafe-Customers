@@ -25,7 +25,9 @@ class EditPerson extends Component {
         }).then(res => {
             this.setState({
                 lists_name: res.data.lists_name,
-                lists_phone: res.data.lists_phone
+                lists_phone: res.data.lists_phone,
+                lists_address: res.data.lists_address,
+                lists_blacklist: res.data.lists_blacklist
             })
         }).catch(error => {
             console.log(error);
@@ -52,9 +54,15 @@ class EditPerson extends Component {
     }
 
     onChangeBlacklist = (e) => {
-        this.setState({
-            lists_blacklist: true
-        })
+        if (this.state.lists_blacklist === true) {
+            this.setState({
+                lists_blacklist: false
+            })
+        } else {
+            this.setState({
+                lists_blacklist: true
+            })
+        }
     }
 
     onSubmit = (e) => {
@@ -110,11 +118,13 @@ class EditPerson extends Component {
                     </div>
                     <div className="form-group">
                         <div className="form-check">
-                            <input className="form-check-input" 
+                            <input className="form-check-input"
+                                checked={this.state.lists_blacklist ? "checked" : ""}
                                 type="checkbox"
                                 onChange={this.onChangeBlacklist}></input>
-                            <label className="form-check-label">Blacklist?</label>
+                            <label className="form-check-label">Blacklist</label>
                         </div>
+                        
                     </div>
                     <div className="form-group">
                         <input 

@@ -4,12 +4,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
-const database = require('./database/db');
+//const database = require('./database/db');
+const passport = require('passport');
 
 const persons = require('./routes/persons');
+const users = require('./routes/user');
+const db = require('./config/keys').mongoURI;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || database.db, { useNewUrlParser: true });
+mongoose.connect(db, { useNewUrlParser: true });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -23,6 +26,15 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, "client", "build", "index.html"));
     });
 }
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+app.use("/users", users);
 
 const port = process.env.PORT || 5000;
 

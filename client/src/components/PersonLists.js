@@ -10,10 +10,9 @@ const styles = {
 
 const Lists = props => (
     <tr>
-        <td>{props.lists.lists_phone}</td>
+        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15}} src={blacklist_skull} alt="blacklist"></img> : <p></p>} {props.lists.lists_phone}</td>
         <td>{props.lists.lists_name}</td>
         <td>{props.lists.lists_address}</td>
-        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15}} src={blacklist_skull}></img> : <p>No</p>}</td>
         <td>
             <button className="btn btn-link">
                 <Link to={'/edit/'+props.lists._id}
@@ -28,6 +27,8 @@ const Lists = props => (
 )
 
 class PersonLists extends Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
 
@@ -39,17 +40,25 @@ class PersonLists extends Component {
     }
 
     componentDidMount = () => {
+        this._isMounted = true;
+
         axios({
             method: 'get',
             url: '/persons'
         }).then(res => {
-            this.setState({ lists: res.data});
+            if (this._isMounted) {
+                this.setState({ lists: res.data});
+            } 
         }).catch(err => {
             console.log(err);
         })
     }
 
-    componentDidUpdate = () =>{
+    componentWillUnmount = () => {
+        this._isMounted = false;
+    }
+
+    componentDidUpdate = () => {
         axios({
             method: 'get',
             url: '/persons',
@@ -90,7 +99,6 @@ class PersonLists extends Component {
                             <th>Phone</th>
                             <th>Name</th>
                             <th>Address</th>
-                            <th>Blacklist</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

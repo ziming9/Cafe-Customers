@@ -4,16 +4,6 @@ const mongoose = require('mongoose');
 
 let Person = require('../models/lists-model');
 
-// router.route('/').get(function(req, res) {
-//     Lists.find(function(err, lists) {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             res.json(lists);
-//         }
-//     });
-// })
-
 router.get('/', (req, res) => { 
     Person.find((err, data) => {
         if (err) {

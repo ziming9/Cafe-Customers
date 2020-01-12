@@ -47,11 +47,12 @@ class CreatePerson extends Component {
         })
     }
 
-    clearHandler = (e) => {
+    clearHandler = () => {
         this.setState({
             name: '',
             phone: '',
-            address: ''
+            address: '',
+            blacklist: false
         })
     }
 
@@ -120,7 +121,7 @@ class CreatePerson extends Component {
                                 <input className="form-check-input" 
                                     type="checkbox"
                                     onChange={this.onChangeBlacklist}></input>
-                                <label className="form-check-label">Blacklist?</label>
+                                <label className="form-check-label">Blacklist</label>
                             </div>
                         </div>
 
