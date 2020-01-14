@@ -82,61 +82,58 @@ class CreatePerson extends Component {
                 <div className="card-body">
                     <form>
                         <div className="row">
-                            <div className="form-group col">
+                            <div className="input-field col">
                                 <label>Phone</label>
                                 <input
                                     value={this.state.phone}
                                     type="text"
-                                    placeholder="Enter phone number"
                                     className="form-control"
                                     phone={this.state.phone}
                                     onChange={this.onChangePhone}></input>
                             </div>
 
-                            <div className="form-group col">
+                            <div className="input-field col">
                                 <label>Name</label>
                                 <input 
                                     type="text"
                                     value={this.state.name}
-                                    placeholder="Enter name"
                                     className="form-control"
                                     name={this.state.name}
                                     onChange={this.onChangeName}></input>
                             </div>
                         </div>
                         
-                        <div className="form-group">
+                        <div className="input-field">
                             <label>Address</label>
                             <input 
                                 type="text"
                                 value={this.state.address}
-                                placeholder="Enter address"
                                 className="form-control"
-                                name={this.state.address}
+                                address={this.state.address}
                                 onChange={this.onChangeAddress}></input>
                         </div>
 
-                        <div className="form-group">
-                            <div className="form-check">
-                                <input className="form-check-input" 
-                                    type="checkbox"
-                                    onChange={this.onChangeBlacklist}></input>
-                                <label className="form-check-label">Blacklist</label>
-                            </div>
-                        </div>
-
+                        <label>
+                            <input 
+                                type="checkbox"
+                                className="filled-in"
+                                onChange={this.onChangeBlacklist}>
+                            </input>
+                            <span>Blacklist</span>
+                        </label>
+                            
                         <div className="form-group">
                             <div className="btn-toolbar">
                             <div className="btn-group ml-5">
                                     <button
-                                        className="btn btn-info"
+                                        className="btn btn-medium waves-effect waves-light hoverable red accent-2"
                                         onClick={this.clearHandler}>Clear</button>
                                 </div>
 
                                 <div className="btn-group ml-5">
                                     <button
                                         type="submit"
-                                        className="btn btn-success"
+                                        className="btn btn-medium waves-effect waves-light hoverable green accent-3"
                                         onClick={this.onSubmit}>Create</button>
                                 </div>
 

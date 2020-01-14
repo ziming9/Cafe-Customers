@@ -10,7 +10,9 @@ const styles = {
 
 const Lists = props => (
     <tr>
-        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15}} src={blacklist_skull} alt="blacklist"></img> : <p></p>} {props.lists.lists_phone}</td>
+        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15}} src={blacklist_skull} alt="blacklist"></img>
+            : <span></span>} 
+            {props.lists.lists_phone}</td>
         <td>{props.lists.lists_name}</td>
         <td>{props.lists.lists_address}</td>
         <td>

@@ -7,10 +7,10 @@ import Auxiliary from './Auxiliary';
 const homeScreen = props => (
     <Auxiliary>
         <div className="row" style={{margin: 20}}>
-            <div className="col-md-8" >
+            <div className="col-md-7 ml-auto" >
                 <PersonLists></PersonLists>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 mr-auto">
                 <CreatePerson></CreatePerson>
             </div>
         </div>

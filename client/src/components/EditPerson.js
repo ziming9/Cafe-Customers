@@ -86,51 +86,47 @@ class EditPerson extends Component {
 
     render () {
         return (
-            <div className="container">
+            <div className="container" style={{marginTop: 20}}>
                 <h3>Edit Person</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                    <div className="text-field">
                         <label>Phone</label>
                         <input 
                             type="text"
                             className="form-control"
-                            placeholder="Enter phone"
                             value={this.state.lists_phone}
                             onChange={this.onChangePhone}></input>
                     </div>
-                    <div className="form-group">
+                    <div className="text-field">
                         <label>Name</label>
                         <input 
                             type="text"
                             className="form-control"
-                            placeholder="Enter name"
                             value={this.state.lists_name}
                             onChange={this.onChangeName}></input>
                     </div>
-                    <div className="form-group">
+                    <div className="text-field">
                         <label>Address</label>
                         <input 
                             type="text"
-                            placeholder="Enter address"
                             className="form-control"
                             value={this.state.lists_address}
                             onChange={this.onChangeAddress}></input>
                     </div>
-                    <div className="form-group">
-                        <div className="form-check">
-                            <input className="form-check-input"
-                                checked={this.state.lists_blacklist ? "checked" : ""}
-                                type="checkbox"
-                                onChange={this.onChangeBlacklist}></input>
-                            <label className="form-check-label">Blacklist</label>
-                        </div>
-                        
-                    </div>
+                    <label>
+                        <input 
+                            type="checkbox"
+                            className="filled-in"
+                            checked={this.state.lists_blacklist ? "checked" : ""}
+                            onChange={this.onChangeBlacklist}>
+                        </input>
+                        <span>Blacklist</span>
+                    </label>
                     <div className="form-group">
                         <input 
                             type="submit" 
                             value="Update" 
-                            className="btn btn-primary"></input>
+                            className="btn btn-success"></input>
                     </div>
                 </form>
             </div>
