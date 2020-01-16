@@ -79,42 +79,47 @@ class CreatePerson extends Component {
     render() {
         return (
             <div style={{marginTop: 20}} className="card">
+                <div className="card-header">
+                    <h4>
+                        Create Customer
+                    </h4>
+                </div>
                 <div className="card-body">
                     <form>
                         <div className="row">
-                            <div className="input-field col">
-                                <label>Phone</label>
+                            <div className="form-group col">
                                 <input
                                     value={this.state.phone}
                                     type="text"
                                     className="form-control"
+                                    placeholder="Phone"
                                     phone={this.state.phone}
                                     onChange={this.onChangePhone}></input>
                             </div>
 
-                            <div className="input-field col">
-                                <label>Name</label>
+                            <div className="form-group col">
                                 <input 
                                     type="text"
                                     value={this.state.name}
                                     className="form-control"
+                                    placeholder="Name"
                                     name={this.state.name}
                                     onChange={this.onChangeName}></input>
                             </div>
                         </div>
                         
-                        <div className="input-field">
-                            <label>Address</label>
+                        <div className="form-group">
                             <input 
                                 type="text"
                                 value={this.state.address}
                                 className="form-control"
+                                placeholder="Address"
                                 address={this.state.address}
                                 onChange={this.onChangeAddress}></input>
                         </div>
 
                         <label>
-                            <input 
+                            <input
                                 type="checkbox"
                                 className="filled-in"
                                 onChange={this.onChangeBlacklist}>
@@ -126,14 +131,16 @@ class CreatePerson extends Component {
                             <div className="btn-toolbar">
                             <div className="btn-group ml-5">
                                     <button
-                                        className="btn btn-medium waves-effect waves-light hoverable red accent-2"
+                                        className="btn"
+                                        style={{backgroundColor: "#5f7481", color: "white"}}
                                         onClick={this.clearHandler}>Clear</button>
                                 </div>
 
                                 <div className="btn-group ml-5">
                                     <button
                                         type="submit"
-                                        className="btn btn-medium waves-effect waves-light hoverable green accent-3"
+                                        className="btn"
+                                        style={{backgroundColor: "#344955", color: "white"}}
                                         onClick={this.onSubmit}>Create</button>
                                 </div>
 

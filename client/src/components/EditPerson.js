@@ -87,48 +87,51 @@ class EditPerson extends Component {
     render () {
         return (
             <div className="container" style={{marginTop: 20}}>
-                <h3>Edit Person</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="text-field">
-                        <label>Phone</label>
-                        <input 
-                            type="text"
-                            className="form-control"
-                            value={this.state.lists_phone}
-                            onChange={this.onChangePhone}></input>
+                <div className="row">
+                    <div className="col-md-6 mx-auto">
+                        <h3>Edit Person</h3>
+                        <form onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                                <input 
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Phone"
+                                    value={this.state.lists_phone}
+                                    onChange={this.onChangePhone}></input>
+                            </div>
+                            <div className="form-group">
+                                <input 
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Name"
+                                    value={this.state.lists_name}
+                                    onChange={this.onChangeName}></input>
+                            </div>
+                            <div className="form-group">
+                                <input 
+                                    type="text"
+                                    placeholder="Address"
+                                    className="form-control"
+                                    value={this.state.lists_address}
+                                    onChange={this.onChangeAddress}></input>
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    type="checkbox"
+                                    className="filled-in"
+                                    checked={this.state.lists_blacklist ? "checked" : ""}
+                                    onChange={this.onChangeBlacklist}>
+                                </input>
+                                <span>Blacklist</span>
+                            </div>
+                            <button
+                                style={{backgroundColor: "#344955", color: "white", marginTop: 5}}
+                                type="submit"
+                                className="btn">Update
+                            </button>
+                        </form>
                     </div>
-                    <div className="text-field">
-                        <label>Name</label>
-                        <input 
-                            type="text"
-                            className="form-control"
-                            value={this.state.lists_name}
-                            onChange={this.onChangeName}></input>
-                    </div>
-                    <div className="text-field">
-                        <label>Address</label>
-                        <input 
-                            type="text"
-                            className="form-control"
-                            value={this.state.lists_address}
-                            onChange={this.onChangeAddress}></input>
-                    </div>
-                    <label>
-                        <input 
-                            type="checkbox"
-                            className="filled-in"
-                            checked={this.state.lists_blacklist ? "checked" : ""}
-                            onChange={this.onChangeBlacklist}>
-                        </input>
-                        <span>Blacklist</span>
-                    </label>
-                    <div className="form-group">
-                        <input 
-                            type="submit" 
-                            value="Update" 
-                            className="btn btn-success"></input>
-                    </div>
-                </form>
+                </div>
             </div>
         )
     }

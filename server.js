@@ -4,9 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
-//const database = require('./database/db');
 const passport = require('passport');
-
 const persons = require('./routes/persons');
 const users = require('./routes/user');
 const db = require('./config/keys').mongoURI;

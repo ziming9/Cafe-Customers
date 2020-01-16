@@ -10,7 +10,7 @@ const styles = {
 
 const Lists = props => (
     <tr>
-        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15}} src={blacklist_skull} alt="blacklist"></img>
+        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15, marginRight: 7, marginBottom: 5}} src={blacklist_skull} alt="blacklist"></img>
             : <span></span>} 
             {props.lists.lists_phone}</td>
         <td>{props.lists.lists_name}</td>
@@ -94,7 +94,7 @@ class PersonLists extends Component {
     render() {
         return (
         <div className="container" style={{marginTop: 20}}>
-                <h3>Person Lists</h3>
+                <h3>Customer List</h3>
                 <table className="table table-striped">
                     <thead>
                         <tr>

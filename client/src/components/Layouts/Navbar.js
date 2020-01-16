@@ -1,29 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const navbar = (props) => (
-    <div className="container">
-        <nav className="navbar navbar-expand-md navbar-dark">
-            <Link to="/" className="navbar-brand">Cafe-App</Link>
-            <div className="collapse navbar-collapse">
-                <ul className="navbar-nav mr-auto">
-                    <li className="navbar-item">
-                        <Link to="/" className="nav-link">Home</Link>
-                    </li>
-                    <li className="navbar-item">
-                        <Link to="/persons" className="nav-link">Lists</Link>
-                    </li>
-                </ul>
-                <div className="col-1.5">
-                <Link to="/register">
-                    <button className="btn btn-medium waves-effect waves-light hoverable cyan accent-4">Register</button>
-                </Link>
-                </div>
-                <div className="col-1">
-                <Link to="/login">
-                    <button className="btn btn-medium waves-effect waves-light hoverable green accent-3">Login</button>
-                </Link>
+    <div className="browser-default">
+        <nav className="navbar navbar-expand-sm mb-4 navbar-dark" style={{ backgroundColor: '#344955'}}>
+            <div className="container">
+                <Link to="/" className="navbar-brand">Cafe Customers</Link>
+                <button className="navbar-toggler material-icons" type="button" data-toggle="collapse" data-target="#mobile-nav">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="mobile-nav">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="navbar-item">
+                            <Link className="nav-link" to="/" className="nav-link">Home</Link>
+                        </li>
+                        <li className="navbar-item">
+                            <Link className="nav-link" to="/persons">Customers</Link>
+                        </li>
+                    </ul>
+
+                    <ul className="navbar-nav ml-auto">
+                        <li className="navbar-item">
+                            <Link to="/register" className="nav-link">Register</Link>
+                        </li>
+                        <li className="navbar-item">
+                        <Link to="/login" className="nav-link">Login</Link>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>

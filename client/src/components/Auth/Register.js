@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
+import qs from 'qs';
 
 class Register extends Component {
   constructor(props) {
@@ -33,13 +36,19 @@ class Register extends Component {
     };
 
     axios({
-      method: "post",
-      url: "users/register",
-      data: newUser
+      method: 'post',
+      url: 'users/register',
+      data: qs.stringify(newUser)
     }).then(res => console.log(res.data));
+
+    this.setState({name: '', email: '', password: '', password2: ''});
   };
+  
 
   render() {
+
+    const { errors } = this.state;
+
     return (
       <div className="container">
         <div className="row">
@@ -52,54 +61,60 @@ class Register extends Component {
               </div>
               <div className="card-body">
                 <form className="d-flex flex-column">
-                  <p className="grey-text text-darken-1">Already have an account?
+                  <p className="text-secondary">Already have an account?
                   <Link to="/login"> Login</Link></p>
-                  <div className="input-field">
-                    <label htmlFor="name">Name</label>
+                  <div className="form-group">
                     <input
                       className="form-control"
                       value={this.state.name}
                       id="name"
                       type="text"
+                      placeholder="Name"
                       name={this.state.name}
                       onChange={this.onChange}
-                    ></input>
+                      error={errors.name}></input>
+                    <span className="red-text">{errors.name}</span>
                   </div>
-                  <div className="input-field">
-                    <label htmlFor="email">Email</label>
+                  <div className="form-group">
                     <input
                       className="form-control"
                       value={this.state.email}
                       id="email"
                       type="email"
+                      placeholder="Email Address"
                       email={this.state.email}
                       onChange={this.onChange}
-                    ></input>
+                      error={errors.email}></input>
+                    <span className="red-text">{errors.email}</span>
                   </div>
-                  <div className="input-field">
-                    <label>Password</label>
+                  <div className="form-group">
                     <input
                       className="form-control"
                       value={this.state.password}
                       id="password"
                       type="password"
+                      placeholder="Password"
                       password={this.state.name}
                       onChange={this.onChange}
-                    ></input>
+                      error={errors.password}></input>
+                    <span className="red-text">{errors.password}</span>
+                    <small className="form-text text-muted">Password must be 6 characters long.</small>
                   </div>
-                  <div className="input-field">
-                    <label>Confirm Password</label>
+                  <div className="form-group">
                     <input
                       className="form-control"
                       value={this.state.password2}
                       id="password2"
                       type="password"
+                      placeholder="Confirm Password"
                       password2={this.state.password2}
                       onChange={this.onChange}
-                    ></input>
+                      error={errors.password2}></input>
+                    <span className="red-text">{errors.password2}</span>
                   </div>
                   <button
-                    className="btn btn-medium waves-effect waves-light hoverable cyan accent-4"
+                    style={{marginTop: 20, backgroundColor: "#344955", color: "white"}}
+                    className="btn"
                     onClick={this.onSubmit}
                     type="submit"
                   >
@@ -115,4 +130,18 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));
