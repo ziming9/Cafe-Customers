@@ -6,25 +6,33 @@ const navbar = (props) => (
         <nav className="navbar navbar-expand-sm mb-4 navbar-dark" style={{ backgroundColor: '#344955'}}>
             <div className="container">
                 <Link to="/" className="navbar-brand">Cafe Customers</Link>
-                <button className="navbar-toggler material-icons" type="button" data-toggle="collapse" data-target="#mobile-nav">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="mobile-nav">
                     <ul className="navbar-nav mr-auto">
                         <li className="navbar-item">
-                            <Link className="nav-link" to="/" className="nav-link">Home</Link>
+                            <div data-toggle="collapse" data-target=".navbar-collapse.show">
+                                <Link className="nav-link" to="/">Home</Link>
+                            </div>
                         </li>
                         <li className="navbar-item">
-                            <Link className="nav-link" to="/persons">Customers</Link>
+                            <div data-toggle="collapse" data-target=".navbar-collapse.show">
+                                <Link className="nav-link" to="/persons">Customers</Link>
+                            </div>
                         </li>
                     </ul>
 
                     <ul className="navbar-nav ml-auto">
                         <li className="navbar-item">
-                            <Link to="/register" className="nav-link">Register</Link>
+                            <div data-toggle="collapse" data-target=".navbar-collapse.show">
+                                <Link to="/register" className="nav-link" >Register</Link>
+                            </div>
                         </li>
                         <li className="navbar-item">
-                        <Link to="/login" className="nav-link">Login</Link>
+                            <div data-toggle="collapse" data-target=".navbar-collapse.show">
+                                <Link to="/login" className="nav-link">Login</Link>
+                            </div>
                         </li>
                     </ul>
                 </div>
