@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-import qs from 'qs';
 
 class Register extends Component {
   constructor(props) {
@@ -18,6 +16,12 @@ class Register extends Component {
       errors: {}
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+        this.setState({ errors: nextProps.errors });
+    }
+}
 
   onChange = e => {
     this.setState({
@@ -35,13 +39,15 @@ class Register extends Component {
       password2: this.state.password2
     };
 
-    axios({
-      method: 'post',
-      url: 'users/register',
-      data: qs.stringify(newUser)
-    }).then(res => console.log(res.data));
+    // axios({
+    //   method: 'post',
+    //   url: '/users/register',
+    //   data: newUser
+    // }).then(res => console.log(res.data));
 
-    this.setState({name: '', email: '', password: '', password2: ''});
+    // this.setState({name: '', email: '', password: '', password2: ''});
+    // this.props.history.push('/login');
+    this.props.registerUser(newUser, this.props.history);
   };
   
 
@@ -60,12 +66,12 @@ class Register extends Component {
                 </h4>
               </div>
               <div className="card-body">
-                <form className="d-flex flex-column">
+                <form onSubmit={this.onSubmit} className="d-flex flex-column">
                   <p className="text-secondary">Already have an account?
                   <Link to="/login"> Login</Link></p>
                   <div className="form-group">
                     <input
-                      className="form-control"
+                      className='form-control'
                       value={this.state.name}
                       id="name"
                       type="text"
@@ -73,7 +79,7 @@ class Register extends Component {
                       name={this.state.name}
                       onChange={this.onChange}
                       error={errors.name}></input>
-                    <span className="red-text">{errors.name}</span>
+                    <span className="invalid-feedback d-block">{errors.name}</span>
                   </div>
                   <div className="form-group">
                     <input
@@ -85,7 +91,7 @@ class Register extends Component {
                       email={this.state.email}
                       onChange={this.onChange}
                       error={errors.email}></input>
-                    <span className="red-text">{errors.email}</span>
+                    <span className="invalid-feedback d-block">{errors.email}</span>
                   </div>
                   <div className="form-group">
                     <input
@@ -97,8 +103,7 @@ class Register extends Component {
                       password={this.state.name}
                       onChange={this.onChange}
                       error={errors.password}></input>
-                    <span className="red-text">{errors.password}</span>
-                    <small className="form-text text-muted">Password must be 6 characters long.</small>
+                    <span className="invalid-feedback d-block">{errors.password}</span>
                   </div>
                   <div className="form-group">
                     <input
@@ -110,12 +115,11 @@ class Register extends Component {
                       password2={this.state.password2}
                       onChange={this.onChange}
                       error={errors.password2}></input>
-                    <span className="red-text">{errors.password2}</span>
+                    <span className="invalid-feedback d-block">{errors.password2}</span>
                   </div>
                   <button
                     style={{marginTop: 20, backgroundColor: "#344955", color: "white"}}
                     className="btn"
-                    onClick={this.onSubmit}
                     type="submit"
                   >
                     Sign Up

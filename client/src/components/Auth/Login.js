@@ -14,12 +14,28 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+        this.props.history.push('/dashboard');
+    }
+}
+
+componentWillReceiveProps(nextProps) {
+  if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+  }
+
+  if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+  }
+}
+
 onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 onSubmit = e => {
     e.preventDefault();
-const userData = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
     };
@@ -53,7 +69,7 @@ return (
                 onChange={this.onChange}
                 error={errors.email}
               ></input>
-              <span className="red-text">
+              <span className="invalid-feedback d-block">
                   {errors.email}
                   {errors.emailnotfound}
                 </span>
@@ -69,7 +85,7 @@ return (
                 onChange={this.onChange}
                 error={errors.password}
               ></input>
-              <span className="red-text">
+              <span className="invalid-feedback d-block">
                   {errors.password}
                   {errors.passwordincorrect}
                 </span>

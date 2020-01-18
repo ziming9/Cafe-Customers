@@ -16,6 +16,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/persons', persons);
+// Routes
+app.use("/users", users);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, "client", "build")));
@@ -30,9 +32,6 @@ app.use(passport.initialize());
 
 // Passport config
 require("./config/passport")(passport);
-
-// Routes
-app.use("/users", users);
 
 const port = process.env.PORT || 5000;
 

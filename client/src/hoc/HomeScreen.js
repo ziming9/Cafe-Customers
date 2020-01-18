@@ -6,14 +6,17 @@ import Auxiliary from './Auxiliary';
 
 const homeScreen = props => (
     <Auxiliary>
+        <div className="container">
         <div className="row" style={{margin: 20}}>
-            <div className="col-md-7 ml-auto" >
+            <div className="col-md-8 mx-auto" >
                 <PersonLists></PersonLists>
             </div>
-            <div className="col-md-3 mr-auto">
+            <div className="col-md-4 mr-auto">
                 <CreatePerson></CreatePerson>
             </div>
         </div>
+        </div>
+        
     </Auxiliary>
 )
 

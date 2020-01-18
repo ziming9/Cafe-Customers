@@ -1,44 +1,33 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+//import axios from 'axios';
+import { createPerson } from '../actions/personActions';
 
 class CreatePerson extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeName = this.onChangeName.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
-        this.onChangeAddress = this.onChangeAddress.bind(this);
-        this.onChangeBlacklist = this.onChangeBlacklist.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.clearHandler = this.clearHandler.bind(this);
+        // States 
+        this.state = {
+            phone: '',
+            name: '',
+            address: '',
+            blacklist: false,
+            errors: {}
+        }
     }
 
-    // States 
-    state = {
-        name: '',
-        phone: '',
-        address: '',
-        blacklist: false
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({ errors: nextProps.errors });
+        }
     }
 
-    // Functions
-    onChangeName = (e) => {
+    onChange = e => {
         this.setState({
-            name: e.target.value
-        });
-    }
-
-    onChangePhone = (e) => {
-        this.setState({
-            phone: e.target.value
-        });
-    }
-
-    onChangeAddress = (e) => {
-        this.setState({
-            address: e.target.value
-        });
+            [e.target.id]: e.target.value
+        })
     }
 
     onChangeBlacklist = (e) => {
@@ -47,7 +36,9 @@ class CreatePerson extends Component {
         })
     }
 
-    clearHandler = () => {
+    clearHandler = (e) => {
+        e.preventDefault();
+
         this.setState({
             name: '',
             phone: '',
@@ -59,24 +50,27 @@ class CreatePerson extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        const newLists = {
-            lists_name: this.state.name,
+        const newPerson = {
             lists_phone: this.state.phone,
+            lists_name: this.state.name,
             lists_address: this.state.address,
             lists_blacklist: this.state.blacklist
         }; 
 
-        axios({
-            method: 'post',
-            url: 'persons/add',
-            data: newLists
-        }).then( res => console.log(res.data));
+        // axios({
+        //     method: 'post',
+        //     url: 'persons/add',
+        //     data: newPerson
+        // }).then( res => console.log(res.data));
 
-        this.setState({name: '', phone: '', address: '', blacklist: false});
+        this.props.createPerson(newPerson);
+        this.setState({phone: '', name: '', address: '', blacklist: false});
     }
 
     // Forms
     render() {
+        const { errors } = this.state;
+
         return (
             <div style={{marginTop: 20}} className="card">
                 <div className="card-header">
@@ -91,31 +85,33 @@ class CreatePerson extends Component {
                                 <input
                                     value={this.state.phone}
                                     type="text"
+                                    id="phone"
                                     className="form-control"
                                     placeholder="Phone"
-                                    phone={this.state.phone}
-                                    onChange={this.onChangePhone}></input>
+                                    onChange={this.onChange}
+                                    error={errors.lists_phone}></input>
+                                <span className="invalid-feedback d-block">{errors.lists_phone}</span>
                             </div>
 
                             <div className="form-group col">
                                 <input 
                                     type="text"
+                                    id="name"
                                     value={this.state.name}
                                     className="form-control"
                                     placeholder="Name"
-                                    name={this.state.name}
-                                    onChange={this.onChangeName}></input>
+                                    onChange={this.onChange}></input>
                             </div>
                         </div>
                         
                         <div className="form-group">
                             <input 
                                 type="text"
+                                id="address"
                                 value={this.state.address}
                                 className="form-control"
                                 placeholder="Address"
-                                address={this.state.address}
-                                onChange={this.onChangeAddress}></input>
+                                onChange={this.onChange}></input>
                         </div>
 
                         <label>
@@ -129,7 +125,7 @@ class CreatePerson extends Component {
                             
                         <div className="form-group">
                             <div className="btn-toolbar">
-                            <div className="btn-group ml-5">
+                                <div className="btn-group ml-5">
                                     <button
                                         className="btn"
                                         style={{backgroundColor: "#5f7481", color: "white"}}
@@ -143,7 +139,6 @@ class CreatePerson extends Component {
                                         style={{backgroundColor: "#344955", color: "white"}}
                                         onClick={this.onSubmit}>Create</button>
                                 </div>
-
                             </div>
                         </div>
                     </form>
@@ -153,4 +148,13 @@ class CreatePerson extends Component {
     }
 }
 
-export default CreatePerson;
+CreatePerson.propTypes = {
+    createPerson: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    errors: state.errors
+});
+
+export default connect(mapStateToProps, {createPerson})(CreatePerson);

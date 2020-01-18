@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Lists = new Schema({
+let PersonSchema = new Schema({
     lists_phone: {
-        type: String
+        type: String,
+        required: true
     },
     lists_name: {
         type: String
@@ -16,4 +17,4 @@ let Lists = new Schema({
     }
 });
 
-module.exports = mongoose.model('Person', Lists);
+module.exports = mongoose.model('Person', PersonSchema);

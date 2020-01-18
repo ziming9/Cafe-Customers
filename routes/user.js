@@ -14,10 +14,12 @@ const User = require("../models/user-model");
 router.post("/register", (req, res) => {
   // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
+
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
+  
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
@@ -71,7 +73,7 @@ router.post("/login", (req, res) => {
           payload,
           keys.secretOrKey,
           {
-            expiresIn: 31556926 // 1 year in seconds
+            expiresIn: 3600
           },
           (err, token) => {
             res.json({
