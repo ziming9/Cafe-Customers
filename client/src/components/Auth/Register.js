@@ -60,9 +60,9 @@ class Register extends Component {
         <div className="row">
           <div className="col-md-5 mx-auto">
             <div className="card" style={{ marginTop: 20 }}>
-              <div className="card-header">
+              <div className="card-header" style={{backgroundColor: '#334854', color: 'white'}}>
                 <h4>
-                  <b>Register</b>
+                  Register
                 </h4>
               </div>
               <div className="card-body">
@@ -76,7 +76,6 @@ class Register extends Component {
                       id="name"
                       type="text"
                       placeholder="Name"
-                      name={this.state.name}
                       onChange={this.onChange}
                       error={errors.name}></input>
                     <span className="invalid-feedback d-block">{errors.name}</span>
@@ -88,7 +87,6 @@ class Register extends Component {
                       id="email"
                       type="email"
                       placeholder="Email Address"
-                      email={this.state.email}
                       onChange={this.onChange}
                       error={errors.email}></input>
                     <span className="invalid-feedback d-block">{errors.email}</span>
@@ -100,7 +98,6 @@ class Register extends Component {
                       id="password"
                       type="password"
                       placeholder="Password"
-                      password={this.state.name}
                       onChange={this.onChange}
                       error={errors.password}></input>
                     <span className="invalid-feedback d-block">{errors.password}</span>
@@ -112,7 +109,6 @@ class Register extends Component {
                       id="password2"
                       type="password"
                       placeholder="Confirm Password"
-                      password2={this.state.password2}
                       onChange={this.onChange}
                       error={errors.password2}></input>
                     <span className="invalid-feedback d-block">{errors.password2}</span>

@@ -49,9 +49,9 @@ return (
   <div className="row">
     <div className="col-md-5 mx-auto">
       <div className="card" style={{ marginTop: 20 }}>
-        <div className="card-header">
+        <div className="card-header" style={{backgroundColor: '#334854', color: 'white'}}>
           <h4>
-            <b>Login</b>
+            Login
           </h4>
         </div>
         <div className="card-body">
@@ -90,9 +90,9 @@ return (
                   {errors.passwordincorrect}
                 </span>
             </div>
-            <p className="align-self-end">
+            {/* <p className="align-self-end">
               <Link to="/register">Forgot password?</Link>
-            </p>
+            </p> */}
             <button
               className="btn"
               style={{backgroundColor: "#344955", color: "white"}}

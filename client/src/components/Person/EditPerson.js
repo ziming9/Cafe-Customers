@@ -116,13 +116,15 @@ class EditPerson extends Component {
                                     onChange={this.onChangeAddress}></input>
                             </div>
                             <div className="form-group">
-                                <input
-                                    type="checkbox"
-                                    className="filled-in"
-                                    checked={this.state.lists_blacklist ? "checked" : ""}
-                                    onChange={this.onChangeBlacklist}>
-                                </input>
-                                <span>Blacklist</span>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        className="filled-in"
+                                        checked={this.state.lists_blacklist ? "checked" : ""}
+                                        onChange={this.onChangeBlacklist}>
+                                    </input>
+                                    <span>Blacklist</span>
+                                </label>
                             </div>
                             <button
                                 style={{backgroundColor: "#344955", color: "white", marginTop: 5}}

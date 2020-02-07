@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 //import axios from 'axios';
-import { createPerson } from '../actions/personActions';
+import { createPerson } from '../../actions/personActions';
+import { createPrivatePerson } from '../../actions/personActions';
 
 class CreatePerson extends Component {
     constructor(props) {
@@ -14,10 +15,11 @@ class CreatePerson extends Component {
             name: '',
             address: '',
             blacklist: false,
+            private: false,
             errors: {}
         }
     }
-
+    
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({ errors: nextProps.errors });
@@ -33,6 +35,12 @@ class CreatePerson extends Component {
     onChangeBlacklist = (e) => {
         this.setState({
             blacklist: true
+        })
+    }
+
+    onChangePrivate = e => {
+        this.setState({
+            private: true
         })
     }
 
@@ -55,25 +63,41 @@ class CreatePerson extends Component {
             lists_name: this.state.name,
             lists_address: this.state.address,
             lists_blacklist: this.state.blacklist
-        }; 
+        };
+
+        if (this.state.private === true) {
+            this.props.createPrivatePerson(newPerson);
+        } else {
+            this.props.createPerson(newPerson);
+        }
 
         // axios({
         //     method: 'post',
         //     url: 'persons/add',
         //     data: newPerson
         // }).then( res => console.log(res.data));
-
-        this.props.createPerson(newPerson);
         this.setState({phone: '', name: '', address: '', blacklist: false});
     }
 
     // Forms
     render() {
         const { errors } = this.state;
+        const { isAuthenticated} = this.props.auth;
+
+        const authCreatePerson = (
+            <label className="col">
+                <input
+                    type="checkbox"
+                    className="filled-in"
+                    onChange={this.onChangePrivate}>
+                </input>
+                <span>Private</span>
+            </label>
+        )
 
         return (
             <div style={{marginTop: 20}} className="card">
-                <div className="card-header">
+                <div className="card-header" style={{backgroundColor: '#334854', color: 'white'}}>
                     <h4>
                         Create Customer
                     </h4>
@@ -113,17 +137,21 @@ class CreatePerson extends Component {
                                 placeholder="Address"
                                 onChange={this.onChange}></input>
                         </div>
+                        
+                        <div className="row">
+                            <label className="col">
+                                <input
+                                    type="checkbox"
+                                    className="filled-in"
+                                    onChange={this.onChangeBlacklist}>
+                                </input>
+                                <span>Blacklist</span>
+                            </label>
 
-                        <label>
-                            <input
-                                type="checkbox"
-                                className="filled-in"
-                                onChange={this.onChangeBlacklist}>
-                            </input>
-                            <span>Blacklist</span>
-                        </label>
-                            
-                        <div className="form-group">
+                            {isAuthenticated ? authCreatePerson : null}
+                        </div>
+                
+                        <div className="row">
                             <div className="btn-toolbar">
                                 <div className="btn-group ml-5">
                                     <button
@@ -150,11 +178,13 @@ class CreatePerson extends Component {
 
 CreatePerson.propTypes = {
     createPerson: PropTypes.func.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    errors: state.errors
+    errors: state.errors,
+    auth: state.auth
 });
 
-export default connect(mapStateToProps, {createPerson})(CreatePerson);
+export default connect(mapStateToProps, {createPerson, createPrivatePerson})(CreatePerson);

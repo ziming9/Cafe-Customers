@@ -14,6 +14,9 @@ let PersonSchema = new Schema({
     },
     lists_blacklist: {
         type: Boolean
+    },
+    lists_email: {
+        type: String
     }
 });
 

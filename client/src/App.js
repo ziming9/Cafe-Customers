@@ -1,18 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import PersonLists from './components/PersonLists';
-import EditPerson from './components/EditPerson';
+import { Provider } from 'react-redux';
+import { setCurrentUser, logoutUser } from './actions/authActions';
+import PersonLists from './components/Person/PersonLists';
+import EditPerson from './components/Person/EditPerson';
 import Layout from './components/Layouts/Layout';
 import HomeScreen from './hoc/HomeScreen';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Footer from './components/Layouts/Footer';
-import { Provider } from 'react-redux';
 import store from './store/storeConfig';
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from './actions/authActions';
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/Layouts/Dashboard";
 

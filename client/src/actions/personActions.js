@@ -17,4 +17,23 @@ export const createPerson = personData => dispatch => {
         payload: err.response.data
     }));
 };
+
+// Add Private Person
+export const createPrivatePerson = personData => dispatch => {
+    axios({
+        method: 'post',
+        url: 'persons/p_add',
+        data: personData
+    })
+    .then(res => dispatch({
+        type: ADD_POST,
+        payload: res.data
+    }))
+    .catch(err => dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+    }));
+}
+
+
   

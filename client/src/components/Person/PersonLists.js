@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import blacklist_skull from '../assets/blacklist_skull.png';
 
 const styles = {
     marginLeft: '2px'
@@ -10,9 +9,7 @@ const styles = {
 
 const Lists = props => (
     <tr>
-        <td>{props.lists.lists_blacklist ? <img style={{width: 15, height: 15, marginRight: 7, marginBottom: 5}} src={blacklist_skull} alt="blacklist"></img>
-            : <span></span>} 
-            {props.lists.lists_phone}</td>
+        <td>{props.lists.lists_phone} {props.lists.lists_blacklist ? <i className="far fa-frown"></i> : <span></span>}</td>
         <td>{props.lists.lists_name}</td>
         <td>{props.lists.lists_address}</td>
         <td>
@@ -34,19 +31,23 @@ class PersonLists extends Component {
     constructor(props) {
         super(props);
 
-        this.deleteHandler = this.deleteHandler.bind(this);
-
         this.state = {
-            lists: []
+            lists: [],
+            auth: false
         }
     }
 
     componentDidMount = () => {
         this._isMounted = true;
+        let urlHandler = '/persons';
+
+        if (this.state.auth === true) {
+            urlHandler = '/persons/private';
+        }
 
         axios({
             method: 'get',
-            url: '/persons'
+            url: urlHandler
         }).then(res => {
             if (this._isMounted) {
                 this.setState({ lists: res.data});
@@ -61,9 +62,15 @@ class PersonLists extends Component {
     }
 
     componentDidUpdate = () => {
+        let urlHandler = '/persons';
+
+        if (this.state.auth === true) {
+            urlHandler = '/persons/private';
+        }
+
         axios({
             method: 'get',
-            url: '/persons',
+            url: urlHandler
         }).then(res => {
             this.setState({ lists: res.data});
         }).catch(err => {
@@ -92,6 +99,8 @@ class PersonLists extends Component {
     }
 
     render() {
+        const { isAuthenticated } = this.props.auth;
+
         return (
         <div className="container" style={{marginTop: 20}}>
                 <h3>Customer List</h3>
@@ -105,6 +114,7 @@ class PersonLists extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                        { isAuthenticated ? this.state.auth = true : this.state.auth = false}
                         { this.personList() }
                     </tbody>
                 </table>
@@ -113,4 +123,8 @@ class PersonLists extends Component {
     }
 }
 
-export default PersonLists;
+const mapStatetoProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStatetoProps)(PersonLists);
