@@ -43,11 +43,7 @@ router.post('/add', (req, res) => {
         return res.status(400).json(errors);
     }
 
-    let email = req.user.email;
-
-    if(req.user.email === null || req.user.email === undefined) {
-        email = 'anonymous@email.com';
-    }
+    let email = 'anonymous@email.com';
 
     const newPerson = new Person({
         lists_phone: req.body.lists_phone,
