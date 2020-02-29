@@ -13,10 +13,9 @@ const Lists = props => (
         <td>{props.lists.lists_name}</td>
         <td>{props.lists.lists_address}</td>
         <td>
-            <button className="btn btn-link">
-                <Link to={'/edit/'+props.lists._id}
-                    style={{textDecoration: 'none'}}>Edit</Link>
-            </button>
+            <Link to={'/edit/'+props.lists._id}
+                className="btn btn-link"
+                style={{textDecoration: 'none'}}>Edit</Link>
             
             <button className="btn btn-link"
                 style={styles}
@@ -102,8 +101,9 @@ class PersonLists extends Component {
         const { isAuthenticated } = this.props.auth;
 
         return (
-        <div className="container" style={{marginTop: 20}}>
-                <h3>Customer List</h3>
+            <div className="container" style={{marginTop: 15}}>
+                <small className="text-secondary">*Note <i className="far fa-frown"></i> = blacklist</small>
+                <h3>Customers</h3>
                 <table className="table table-striped">
                     <thead>
                         <tr>
@@ -118,7 +118,7 @@ class PersonLists extends Component {
                         { this.personList() }
                     </tbody>
                 </table>
-            </div>
+            </div>  
         )
     }
 }

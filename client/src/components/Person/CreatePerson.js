@@ -15,7 +15,7 @@ class CreatePerson extends Component {
             name: '',
             address: '',
             blacklist: false,
-            private: false,
+            //private: false,
             errors: {}
         }
     }
@@ -38,11 +38,11 @@ class CreatePerson extends Component {
         })
     }
 
-    onChangePrivate = e => {
-        this.setState({
-            private: true
-        })
-    }
+    // onChangePrivate = e => {
+    //     this.setState({
+    //         private: true
+    //     })
+    // }
 
     clearHandler = (e) => {
         e.preventDefault();
@@ -65,11 +65,13 @@ class CreatePerson extends Component {
             lists_blacklist: this.state.blacklist
         };
 
-        if (this.state.private === true) {
-            this.props.createPrivatePerson(newPerson);
-        } else {
-            this.props.createPerson(newPerson);
-        }
+        // if (this.state.private === true) {
+        //     this.props.createPrivatePerson(newPerson);
+        // } else {
+        //     this.props.createPerson(newPerson);
+        // }
+
+        this.props.createPrivatePerson(newPerson);
 
         // axios({
         //     method: 'post',
@@ -82,18 +84,18 @@ class CreatePerson extends Component {
     // Forms
     render() {
         const { errors } = this.state;
-        const { isAuthenticated} = this.props.auth;
+        // const { isAuthenticated} = this.props.auth;
 
-        const authCreatePerson = (
-            <label className="col">
-                <input
-                    type="checkbox"
-                    className="filled-in"
-                    onChange={this.onChangePrivate}>
-                </input>
-                <span>Private</span>
-            </label>
-        )
+        // const authCreatePerson = (
+        //     <label className="col">
+        //         <input
+        //             type="checkbox"
+        //             className="filled-in"
+        //             onChange={this.onChangePrivate}>
+        //         </input>
+        //         <span>Private</span>
+        //     </label>
+        // )
 
         return (
             <div style={{marginTop: 20}} className="card">
@@ -148,7 +150,7 @@ class CreatePerson extends Component {
                                 <span>Blacklist</span>
                             </label>
 
-                            {isAuthenticated ? authCreatePerson : null}
+                            {/* {isAuthenticated ? authCreatePerson : null} */}
                         </div>
                 
                         <div className="row">

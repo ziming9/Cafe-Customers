@@ -30,7 +30,7 @@ class Navbar extends Component {
             <ul className="navbar-nav ml-auto">
                 <li className="navbar-item">
                     <div data-toggle="collapse" data-target=".navbar-collapse.show">
-                        <Link to="/register" className="nav-link" >Register</Link>
+                        <Link to="/register" className="nav-link">Register</Link>
                     </div>
                 </li>
                 <li className="navbar-item">
@@ -41,8 +41,16 @@ class Navbar extends Component {
             </ul>
         )
 
+        const authNavBar = (
+            <li className="navbar-item">
+                <div data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                </div>
+            </li>
+        )
+
     return (
-        <div className="browser-default">
+        <div className="navbar-default">
             <nav className="navbar navbar-expand-sm mb-4 navbar-dark" style={{ backgroundColor: '#344955'}}>
                 <div className="container">
                     <Link to="/" className="navbar-brand">Cafe Customers</Link>
@@ -51,11 +59,7 @@ class Navbar extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="mobile-nav">
                         <ul className="navbar-nav mr-auto">
-                            <li className="navbar-item">
-                                <div data-toggle="collapse" data-target=".navbar-collapse.show">
-                                    <Link className="nav-link" to="/">Home</Link>
-                                </div>
-                            </li>
+                            {isAuthenticated ? authNavBar : null}
                             <li className="navbar-item">
                                 <div data-toggle="collapse" data-target=".navbar-collapse.show">
                                     <Link className="nav-link" to="/persons">Customers</Link>
@@ -66,6 +70,7 @@ class Navbar extends Component {
                     </div>
                 </div>
             </nav>
+            
         </div>
     )}
 }

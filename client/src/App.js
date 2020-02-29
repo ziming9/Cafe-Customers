@@ -14,6 +14,7 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/Layouts/Dashboard";
+import AddPerson_List from "./components/Person/AddPerson_List";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -25,7 +26,7 @@ if (localStorage.jwtToken) {
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
 // Check for expired token
-  const currentTime = Date.now() / 1000; // to get in milliseconds
+  const currentTime = Date.now() / 10000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
     store.dispatch(logoutUser());
@@ -39,13 +40,14 @@ function App() {
     <Provider store={store}>
       <Router>
         <Layout />
-        <Route path="/" exact component={HomeScreen}></Route>
+        <Route path="/" exact component={Dashboard}></Route>
         <Route path="/persons" component={PersonLists}></Route>
         <Route path="/edit/:id" component={EditPerson}></Route>
         <Route path="/register" component={Register}></Route>
         <Route path="/login" component={Login}></Route>
         <Switch>
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard}></PrivateRoute>
+          <PrivateRoute exact path="/persons_list" component={AddPerson_List}></PrivateRoute>
         </Switch>
       </Router>
       <Footer />

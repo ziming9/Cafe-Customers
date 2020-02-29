@@ -11,27 +11,52 @@ class Dashboard extends Component {
   };
 
 render() {
-    const { user } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
 
-return (
+    const homeScreen = (
+      <div className="landing">
+        <div className="dark-overlay landing-inner text-light">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12 text-center">
+                        <h1 className="display-4 mb-4">Cafe Customers</h1>
+                        <p>Create an account and store your customers privately</p>
+                        <Link to="/register" className="btn">Sign Up</Link>
+                        <Link to="/login" className="btn">Login</Link>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    )
+
+    const dashBoard = (
       <div style={{ marginTop: 20 }} className="container">
         <div className="row">
-          <div className="mx-auto">
+          <div className="col-md-12 text-center">
             <h4>Welcome {user.name}</h4>
             <div>
               <p className="text-secondary">What would you like to do today?</p>
+              <Link to="/persons_list">
+                <button className="btn"
+                  style={{marginTop: 10, backgroundColor: "#344955", color: "white"}}>Add customers</button>
+              </Link>
               <Link to="/persons">
                 <button 
                   className="btn" 
-                  style={{marginTop: 20, backgroundColor: "#344955", color: "white"}}>View customers</button>
+                  style={{marginTop: 10, backgroundColor: "#344955", color: "white"}}>View customers</button>
               </Link>
             </div>
           </div>
-          
         </div>
       </div>
-    );
-  }
+    )
+
+return (
+  <div>
+    {isAuthenticated ? dashBoard : homeScreen}
+  </div>    
+  )}
 }
 
 Dashboard.propTypes = {

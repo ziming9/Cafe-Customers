@@ -17,4 +17,7 @@ module.exports = function(app) {
     app.use(proxy('/persons/p_add', 
         { target: 'http://localhost:5000' }
     ));
+    app.use(proxy('/persons_list', 
+        { target: 'http://localhost:5000' }
+    ));
 }
